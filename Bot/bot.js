@@ -3,11 +3,11 @@ const axios = require('axios');
 const TOKEN = '6943132421:AAEUg3jeaE4lOUjWj34MmGMJcaBLqPfFtTc';
 const bot = new Telegraf(TOKEN);
 
-const PAGE_SIZE = 5; // Количество элементов на одной странице
-const MAX_MESSAGE_LENGTH = 4096; // Максимальная длина сообщения
+const PAGE_SIZE = 5; 
+const MAX_MESSAGE_LENGTH = 4096; 
 
-let employeesData = []; // Хранение данных сотрудников
-let currentPage = 0; // Текущая страница
+let employeesData = []; 
+let currentPage = 0; 
 
 const web_link = 'https://site1.as-web.kz/';
 
@@ -39,9 +39,9 @@ bot.on('text', async (ctx) => {
   } else if (text === 'Сотрудники') {
     try {
       const response = await axios.get('http://localhost:3001/api/employees');
-      employeesData = response.data; // Сохраняем данные сотрудников
-      currentPage = 0; // Сбрасываем текущую страницу
-      sendPage(ctx, 0); // Отправляем первую страницу
+      employeesData = response.data;
+      currentPage = 0; 
+      sendPage(ctx, 0); 
     } catch (error) {
       ctx.reply('Failed to fetch employees data.');
     }
@@ -88,9 +88,9 @@ const sendPage = (ctx, page) => {
 
 bot.action(/employees_(\d+)/, async (ctx) => {
   const page = parseInt(ctx.match[1]);
-  currentPage = page; // Обновляем текущую страницу
-  ctx.deleteMessage(); // Удаляем старое сообщение
-  sendPage(ctx, page); // Отправляем новую страницу
+  currentPage = page;
+  ctx.deleteMessage();
+  sendPage(ctx, page);
 });
 
 bot.launch();
