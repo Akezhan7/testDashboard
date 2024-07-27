@@ -9,7 +9,6 @@ const port = 3001;
 app.use(cors());
 app.use(express.json());
 
-// API routes
 app.get('/api/dashboard', async (req, res) => {
   try {
     const postsResponse = await axios.get('https://jsonplaceholder.typicode.com/posts');
@@ -41,7 +40,6 @@ app.get('/api/profile', async (req, res) => {
   }
 });
 
-// Serve frontend build files
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.get('*', (req, res) => {
